@@ -6,7 +6,6 @@ import numpy as np
 YOLOCFG_FNAME = 'yolov3.cfg'
 YOLO_CLASSES_FNAME = 'yolov3.txt'
 YOLO_WEIGHTS_FNAME = 'yolov3.weights'
-FRAME_SIZE = 50
 
 def get_output_layers(net):  
     layer_names = net.getLayerNames()  
@@ -78,6 +77,9 @@ for out in outs:
             boxes.append([x, y, w, h])
 
 ################################################
+print('Found', len(set(class_ids)), 'different classes. ->')
+for c in set(class_ids):
+    print(classes[c])
 
 # apply non-max suppression
 indices = cv2.dnn.NMSBoxes(boxes, confidences, conf_threshold, nms_threshold)
